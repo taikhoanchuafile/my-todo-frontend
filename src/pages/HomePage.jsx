@@ -118,7 +118,7 @@ const HomePage = () => {
             </div>
           </div>
         </main>
-        <footer className="relative z-10 text-center mt-10 font-semibold">
+        <footer className="relative z-10 text-center font-semibold">
           📣📣📣📣📣 Lập ra rồi thì nhớ làm cho xong nha YEEEEEEEE 📣📣📣📣📣
         </footer>
       </div>
