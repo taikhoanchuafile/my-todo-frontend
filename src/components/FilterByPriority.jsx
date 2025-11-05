@@ -13,7 +13,7 @@ const FilterByPriority = () => {
   };
   return (
     <div>
-      <h1 className="font-semibold py-4">Lọc theo độ ưu tiên</h1>
+      <h1 className="font-semibold py-4 capitalize">Lọc theo độ ưu tiên</h1>
       <RadioGroup
         defaultValue={priorityFilter}
         className="flex flex-col gap-4"

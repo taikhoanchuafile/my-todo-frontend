@@ -13,7 +13,7 @@ const FilterByStatus = () => {
   };
   return (
     <div>
-      <h1 className="font-semibold py-4">Lọc theo trạng thái</h1>
+      <h1 className="font-semibold py-4 capitalize">Lọc theo trạng thái</h1>
       <RadioGroup
         defaultValue="comfortable"
         className="flex flex-col gap-4"

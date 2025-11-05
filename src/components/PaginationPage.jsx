@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/pagination";
 const PaginationPage = ({ page, setPage, pages }) => {
   return (
-    <div>
+    <div className="fixed bottom-20 left-1/2 -translate-x-1/2">
       <Pagination>
         <PaginationContent>
           {/* prev */}

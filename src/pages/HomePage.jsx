@@ -88,7 +88,7 @@ const HomePage = () => {
           }}
         />
 
-        <div className="container relative z-10">
+        <main className="container relative z-10">
           <div className="w-full lg:max-w-[80%] flex flex-col gap-4">
             <AddTaskAndTitle handleChange={fetchTasks} />
             <hr />
@@ -104,14 +104,7 @@ const HomePage = () => {
               >
                 <FilterCategories />
               </TasksContext.Provider>
-              {/* <FilterCategories
-                statusFilter={statusFilter}
-                setStatusFilter={setStatusFilter}
-                priorityFilter={priorityFilter}
-                setPriorityFilter={setPriorityFilter}
-                tasksTotalBy={tasksTotalBy}
-              /> */}
-              <div className="flex-1 flex flex-col gap-4">
+              <div className="flex-1 flex flex-col gap-4 relative">
                 <TasksList
                   tasksBuffer={tasksBuffer}
                   handleChange={fetchTasks}
@@ -124,7 +117,10 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </main>
+        <footer className="relative z-10 text-center mt-10 font-semibold">
+          📣📣📣📣📣 Lập ra rồi thì nhớ làm cho xong nha YEEEEEEEE 📣📣📣📣📣
+        </footer>
       </div>
     </>
   );

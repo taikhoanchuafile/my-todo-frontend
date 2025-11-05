@@ -21,7 +21,9 @@ const AddTaskAndTitle = ({ handleChange }) => {
 
   return (
     <div className="flex justify-between items-center gap-4">
-      <h1 className="text-4xl font-bold tracking-wide">ToDo</h1>
+      <h1 className="text-4xl font-bold tracking-wide capitalize">
+        Kế hoạch của bạn là gì!
+      </h1>
       <div>
         <Button
           onClick={() => {
