@@ -17,6 +17,17 @@ import { format } from "date-fns";
 import { da, vi } from "date-fns/locale";
 import { toast } from "react-toastify";
 import api from "@/api/axios";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const TaskCard = ({ task, index, handleChange }) => {
   const [open, setOpen] = useState(false);
@@ -93,7 +104,7 @@ const TaskCard = ({ task, index, handleChange }) => {
           <Badge
             onClick={handleToggleStatus}
             className={cn(
-              "capitalize cursor-pointer hover:scale-110 hover:shadow-[0_4px_8px_-2px_#000] transition duration-500",
+              "text-xs md:text-sm capitalize cursor-pointer hover:scale-110 hover:shadow-[0_4px_8px_-2px_#000] transition duration-500",
               task.status === "pending"
                 ? "bg-gray-400"
                 : task.status === "in-progress"
@@ -101,7 +112,11 @@ const TaskCard = ({ task, index, handleChange }) => {
                 : "bg-green-600"
             )}
           >
-            {task.status}
+            {task.status === "pending"
+              ? "Chờ"
+              : task.status === "in-progress"
+              ? "Đang tiến hành"
+              : "Hoàn thành"}
           </Badge>
 
           {/* Nút sửa và xóa */}
@@ -113,9 +128,9 @@ const TaskCard = ({ task, index, handleChange }) => {
               }}
               variant=""
               size="icon"
-              className="cursor-pointer"
+              className="cursor-pointer size-8 md:size-9"
             >
-              <Eye />
+              <Eye className="size-4" />
             </Button>
             <Button
               onClick={() => {
@@ -124,46 +139,67 @@ const TaskCard = ({ task, index, handleChange }) => {
               }}
               variant="secondary"
               size="icon"
-              className="cursor-pointer"
+              className="cursor-pointer size-8 md:size-9"
             >
-              <Pencil />
+              <Pencil className="size-4" />
             </Button>
 
-            <Button
-              onClick={deleteTask}
-              variant="secondary"
-              size="icon"
-              className="cursor-pointer"
-            >
-              <Trash2 />
-            </Button>
+            {/* Xóa */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="secondary"
+                  className="cursor-pointer size-8 md:size-9"
+                >
+                  <Trash2 className="size-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Bạn có chắc làm điều này</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Nếu bạn xóa, bạn sẽ không thể khôi phục được. Bạn có muốn
+                    xóa?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Hủy</AlertDialogCancel>
+                  <AlertDialogAction onClick={deleteTask}>
+                    Tiếp tục
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
-        <h1 className="text-xl lg:text-2xl font-semibold capitalize line-clamp-1 wrap-break-word wrap">
+        <h1 className="text-xl md:text-2xl font-semibold capitalize line-clamp-1 wrap-break-word wrap">
           {task.title.length > 50
             ? task.title.slice(1, 50) + "..."
             : task.title}
         </h1>
-        <p>
+        <p className="text-sm md:text-base">
           {task.description.length > 50
             ? task.description.slice(1, 50) + "..."
             : task.description}
         </p>
-        <div className="flex gap-4">
-          <p className="text-xs text-neutral-500 my-2">
-            <span className="font-bold uppercase text-white p-1 bg-neutral-700 rounded-md mt-2">
+        <div className="flex gap-2  md:gap-4">
+          {/* Hạn hoàn thành */}
+          <p className="text-xs md:text-sm text-neutral-500 my-2">
+            <span className="text-xs md:text-sm font-bold uppercase text-neutral-700 rounded-md mt-2">
               Hạn:
             </span>{" "}
             {task.dueDate &&
-              format(task.dueDate, "eeee, dd/MM/yyyy, HH:mm:ss", {
+              format(task.dueDate, "eeee, dd/MM/yyyy", {
                 locale: vi,
               })}
             {/* {new Date(task.dueDate).toLocaleString()} */}
           </p>
+
+          {/* mức độ */}
           <Badge
             onClick={handleTogglePriority}
             className={cn(
-              "rounded-md capitalize cursor-pointer hover:scale-110 hover:shadow-[0_4px_8px_-2px_#000] transition duration-500",
+              "text-xs md:text-sm rounded-md capitalize cursor-pointer hover:scale-110 hover:shadow-[0_4px_8px_-2px_#000] transition duration-500",
               task.priority === "low"
                 ? "bg-blue-500"
                 : task.priority === "medium"

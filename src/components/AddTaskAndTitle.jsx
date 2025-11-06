@@ -20,8 +20,8 @@ const AddTaskAndTitle = ({ handleChange }) => {
   };
 
   return (
-    <div className="flex justify-between items-center gap-4">
-      <h1 className="text-4xl font-bold tracking-wide capitalize">
+    <div className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4">
+      <h1 className="text-2xl md:text-4xl font-bold tracking-wide capitalize">
         Kế hoạch của bạn là gì!
       </h1>
       <div>
@@ -29,9 +29,9 @@ const AddTaskAndTitle = ({ handleChange }) => {
           onClick={() => {
             setOpen(true);
           }}
-          className="bg-blue-500 text-base cursor-pointer"
+          className="bg-blue-500 text-sm md:text-base cursor-pointer "
         >
-          <CirclePlus className="size-5" />
+          <CirclePlus className="size-4" />
           Thêm task
         </Button>
         <AddAndUpdateTask

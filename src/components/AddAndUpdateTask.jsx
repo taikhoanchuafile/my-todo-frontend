@@ -20,6 +20,17 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { vi } from "date-fns/locale";
 import { priorities, status } from "@/lib/data";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const AddAndUpdateTask = ({
   open,
@@ -83,7 +94,7 @@ const AddAndUpdateTask = ({
       {mode === "read" ? (
         <div>
           <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="overflow-auto max-h-[600px] wrap-break-word">
+            <DialogContent className="wrap-break-word whitespace-break-spaces overflow-auto max-h-100 max-w-sm">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold tracking-wide capitalize">
                   {defaultValues.title}
@@ -119,10 +130,14 @@ const AddAndUpdateTask = ({
           </Dialog>
         </div>
       ) : (
+        // UPDATE/DELETE-----------------------------------------------------
         <div>
           {/* Bảng add/update */}
           <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="max-w-sm">
+            <DialogContent
+              onInteractOutside={(e) => e.defaultValues()} //Ngăn chặn dialog click ra bị ẩn
+              className="max-w-sm"
+            >
               <DialogHeader>
                 <DialogTitle>
                   {mode === "add" && "Thêm công việc"}
@@ -150,7 +165,7 @@ const AddAndUpdateTask = ({
                       {...register("description")}
                       id="description"
                       placeholder="Mô tả cho công việc..."
-                      className="h-80"
+                      className="max-h-60 md: "
                     />
                   </div>
 
@@ -199,10 +214,30 @@ const AddAndUpdateTask = ({
                     />
                   </div>
 
+                  {/* CTA */}
                   <div className="flex justify-end gap-2 mt-2">
-                    <Button type="button" onClick={() => setOpen(false)}>
-                      Hủy
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button>Hủy</Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Bạn có chắc làm điều này không?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Khi bạn hủy, mọi dữ liệu mà bạn đã sửa sẽ không được
+                            lưu. Bạn có chắc vẫn hủy?
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Hủy</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => setOpen(false)}>
+                            Tiếp tục
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                     <Button type="submit">
                       {mode === "edit" ? "Lưu" : "Thêm"}
                     </Button>

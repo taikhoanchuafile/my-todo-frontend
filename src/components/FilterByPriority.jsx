@@ -38,7 +38,9 @@ const FilterByPriority = () => {
                   ? "bg-blue-500"
                   : index === 1
                   ? "bg-orange-500"
-                  : "bg-red-500"
+                  : index === 2
+                  ? "bg-red-500"
+                  : "bg-neutral-800"
               )}
             >
               {priority.label}

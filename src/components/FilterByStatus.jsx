@@ -34,11 +34,14 @@ const FilterByStatus = () => {
               htmlFor={sta.value}
               className={cn(
                 "flex items-center justify-center gap-2 border rounded-xl px-4 py-2 cursor-pointer peer-data-[state=checked]:scale-150 peer-data-[state=checked]:text-white transition-all duration-500",
+
                 index === 0
                   ? "bg-gray-400"
                   : index === 1
                   ? "bg-yellow-500"
-                  : "bg-green-600"
+                  : index === 2
+                  ? "bg-green-600"
+                  : "bg-neutral-800"
               )}
             >
               {sta.label}

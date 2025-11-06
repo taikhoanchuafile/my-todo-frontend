@@ -88,11 +88,11 @@ const HomePage = () => {
           }}
         />
 
-        <main className="container relative z-10">
+        <main className="container h-full flex flex-col items-center gap-4 relative z-10">
           <div className="w-full lg:max-w-[80%] flex flex-col gap-4">
             <AddTaskAndTitle handleChange={fetchTasks} />
             <hr />
-            <div className="flex gap-8">
+            <div className="flex flex-col md:flex-row gap-8 ">
               <TasksContext.Provider
                 value={{
                   statusFilter,
@@ -109,17 +109,22 @@ const HomePage = () => {
                   tasksBuffer={tasksBuffer}
                   handleChange={fetchTasks}
                 />
-                <PaginationPage
-                  page={pageTasksList}
-                  setPage={setPageTasksList}
-                  pages={pages}
-                />
               </div>
             </div>
           </div>
+          {tasksBuffer.length !== 0 && (
+            <div>
+              <PaginationPage
+                page={pageTasksList}
+                setPage={setPageTasksList}
+                pages={pages}
+              />
+            </div>
+          )}
         </main>
-        <footer className="relative z-10 text-center font-semibold">
-          📣📣📣📣📣 Lập ra rồi thì nhớ làm cho xong nha YEEEEEEEE 📣📣📣📣📣
+
+        <footer className="hidden md:block relative z-10 py-5 text-center font-semibold">
+          📣📣 Lập ra rồi thì nhớ làm cho xong nha YEEEEEEEE 📣📣
         </footer>
       </div>
     </>

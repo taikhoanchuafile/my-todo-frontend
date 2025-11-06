@@ -117,10 +117,13 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    @apply text-xs md:text-sm lg:text-base;
+  }
 }
 
 @layer utilities {
   .container {
-    @apply w-full max-w-[1536px] mx-auto px-8 py-4 lg:px-12 lg:py-16 flex items-center justify-center;
+    @apply w-full max-w-[1536px] mx-auto px-8 py-4 lg:px-12 lg:py-16;
   }
 }
